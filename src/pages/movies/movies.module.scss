@@ -1,0 +1,97 @@
+.container {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+}
+.sidebar {
+  width: 80px;
+  height: 95vh;
+  position: fixed;
+  background-color: var(--blue-700);
+  padding: 0.8rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 15;
+  ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    li{
+      padding: 1.5rem 0;
+    }
+  }
+}
+.logo {
+  width: 15px;
+  height: auto;
+}
+.content {
+  padding: 0 1rem 0 1rem;
+  margin-left: 5rem;
+}
+.trending {
+  h2{
+    padding: 1.5rem 0;
+  }
+}
+.trendingContent {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+.trendMovie {
+  position: relative;
+  
+  img {
+    width: 380px;
+    border-radius: 15px;
+  }
+  .imgOverlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%; 
+    opacity: 0.30;
+    transition: .5s ease;
+    background-color: #000;
+    border-radius: 15px;
+  }
+  .trendLabel {
+    position: absolute;
+    bottom: 40px;
+    left: 16px;
+    text-shadow: 5px;
+    
+  }
+  .trendTitle {
+    position: absolute;
+    bottom: 20px;
+    left: 16px;
+  }
+}
+
+.forYou{
+  h2{
+    padding: 1.5rem 0;
+  }
+}
+.catalog{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5rem;
+  margin-bottom: 2rem;
+  .movie{
+    width: 320px;
+  }
+  img {
+    width: 320px;
+    border-radius: 15px;
+  }
+  
+}

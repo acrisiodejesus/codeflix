@@ -2,71 +2,44 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Logo from '../../public/logo.png'
+import Hero from '../../public/hero.svg'
 import styles from './home.module.scss'
 import {BsFillGridFill, BsBookmarkFill} from 'react-icons/bs'
 import { LoginButton } from '../components/loginButton'
-
-interface Movie {
-  id: number;
-  title: string;
-  description: string;
-  imageUrl: string;
-  views: number;
-}
-interface MoviesProps{
-  movies: Movie[]
-}
+import { FaGithub } from 'react-icons/fa'
+import { useSession, signIn } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 
-const Home = ({movies}: MoviesProps) => {
-  
-  return (
+
+const Home = () => {
+  const {data: session} = useSession()
+  const router = useRouter()
+  return session ? router.push('/movies'): 
+  (
     <>
       <Head>
         <title>CodeFlix</title>
       </Head>
       <main className={styles.container}>
-        <div className={styles.sidebar}>
-          <Image src={Logo} alt="Movie Icon" className={styles.logo}/>
-          <ul>
-            <li><a href="#"><BsFillGridFill size="2rem" color='#fff'/></a></li>
-            <li><a href="#"><BsBookmarkFill size="2rem" color='#5d668b'/></a></li>
-            
-          </ul>
-          <LoginButton/>
-        </div>
         <div className={styles.content}>
-          <section className={styles.trending}>
-            <h2>Em Alta</h2>
-            <div className={styles.trendingContent} >
-              {movies.slice(0, 4).map(movie => ( 
-                <div key={movie.id} className={styles.trendMovie}>
-                  <Image width="320px" height="213px" src={movie.imageUrl} alt={movie.title}/>
-                  <span className={styles.imgOverlay}></span>
-                  <h3 className={styles.trendTitle}>{movie.title}</h3>
-                </div>
-
-                ))
-              }
-              
-              
-              
-            </div>
-          </section>
-          <section className={styles.forYou}>
-            <h2>Para você</h2>
-            <div className={styles.catalog}>
-            {movies.map(movie => ( 
-              <div key={movie.id} className={styles.movie}>
-               <Image width="320px" height="213px" src={movie.imageUrl} alt={movie.title}/>
-                <p className={styles.label}>{movie.views} visualizações</p>
-                <h3 className={styles.title}>{movie.title}</h3>
-              </div>
-            ))}
-            </div>
-          </section>
+          <div className={styles.logo}>
+            <Image width="61px" height="54px" blurDataURL="data:..." placeholder="blur"
+            src={Logo} alt="Movie Icon" 
+            />
+          </div> 
+          <h2>CodeFlix</h2>
+          <h1>Movies for Developers</h1>
+          <p>Find the best movies of technology and programming completely free.</p>
+          <button onClick={()=> signIn()} className={styles.signInButton}>
+            <FaGithub color="var(--red-500)" size="2.5rem" />
+            <p>SignIn with Github</p>
+          </button>
         </div>
+        <Image src={Hero} alt="Movie Icon" className={styles.hero} 
+        blurDataURL="data:..." placeholder="blur" width="420" height="420"/>
       </main>
+      <p className={styles.credits}> Template by Acrísio de Jesus - <strong>2022 © SejaCriativoMZ</strong></p>
     </>
   )
 }
@@ -75,7 +48,7 @@ export async function getStaticProps() {
   
   const res = await fetch('http://localhost:3000/api/movies')
   const movies = await res.json()
-  console.log
+  
 
   return {
     props: {
