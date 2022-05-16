@@ -22,9 +22,7 @@ interface MoviesProps{
 
 const Movies = ({movies}: MoviesProps) => {
   const {data: session} = useSession()
-  const router = useRouter()
-  return 
-  (
+  return (
     <>
       <Head>
         <title>CodeFlix</title>
