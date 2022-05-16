@@ -23,7 +23,7 @@ interface MoviesProps{
 const Movies = ({movies}: MoviesProps) => {
   const {data: session} = useSession()
   const router = useRouter()
-  return session ? 
+  return 
   (
     <>
       <Head>
@@ -72,7 +72,7 @@ const Movies = ({movies}: MoviesProps) => {
         </div>
       </main>
     </>
-  ) : (<>{()=>(router.push('/'))}</>)
+  ) 
 }
 
 export async function getStaticProps() {
